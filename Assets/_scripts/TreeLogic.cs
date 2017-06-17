@@ -64,6 +64,7 @@ public class TreeLogic : MonoBehaviour
 		transform.GetChild (0).gameObject.SetActive (true);
 		//动画模式
 //		transform.GetChild (0).gameObject.GetComponent<DOTweenAnimation> ().DOPlayById ("0");
+		transform.GetChild (0).GetComponent<Animator> ().SetTrigger ("toBig");
 		//静态模式
 		gameObject.GetComponentInChildren<Renderer> ().material = mMatGreen;
 	}
@@ -92,8 +93,9 @@ public class TreeLogic : MonoBehaviour
 		mCurrentStatus = TreeStatus.Dead;
 		//动画模式
 //		transform.GetChild (0).gameObject.GetComponent<DOTweenAnimation> ().DOPlayById ("1");
+		transform.GetChild (0).GetComponent<Animator> ().SetTrigger ("toSmall");
 		//静态模式
-		transform.GetChild (0).gameObject.SetActive (false);
+//		transform.GetChild (0).gameObject.SetActive (false);
 	}
 
 	//获取当前树周围活着的树

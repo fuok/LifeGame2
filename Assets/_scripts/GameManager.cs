@@ -12,14 +12,8 @@ public class GameManager : MonoBehaviour
 	void Start ()
 	{
 		btnNextTurn.onClick.AddListener (() => {
-//			mTreeContainer.BroadcastMessage ("GetAliveAround", SendMessageOptions.RequireReceiver);//可以考虑协程循环发出
-//			foreach (var item in mTreeContainer.GetComponentsInChildren<TreeLogic>()) {
-//				item.BroadcastMessage
-//			}
 //			Invoke ("StartNextTurn", 0f);
 			InvokeRepeating ("StartNextTurn", 0.5f, 1f);
-
-
 		});
 
 		btnAddTrees.onClick.AddListener (() => {

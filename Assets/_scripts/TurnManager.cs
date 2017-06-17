@@ -19,15 +19,15 @@ public class TurnManager : MonoBehaviour
 		}
 	}
 
-//	void Start ()
-//	{
-//		
-//	}
+	//	void Start ()
+	//	{
+	//
+	//	}
 
-//	void Update ()
-//	{
-//		
-//	}
+	//	void Update ()
+	//	{
+	//
+	//	}
 
 	public void NextTurn ()
 	{

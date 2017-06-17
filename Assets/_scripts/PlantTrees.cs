@@ -7,13 +7,25 @@ public class PlantTrees : MonoBehaviour
 
 	public int mX;
 	public int mY;
+	public int mAddNum;
+	//为mX*mY的1/14～1/15
+
+	[Header ("生长因子/消亡因子")]
+	public int mThresholdGrow;
+	public int mThresholdDieMin;
+	public int mThresholdDieMax;
+
 	public GameObject mTree;
 	public Transform mTreeContainer;
 
 	void Awake ()
 	{
 		Constants.NUM_X = mX;
-		Constants.NUM_Y = mY;		
+		Constants.NUM_Y = mY;	
+		Constants.NUM_ADD = mAddNum;
+		Constants.THRESHOLD_GROW = mThresholdGrow;
+		Constants.THRESHOLD_DIE_MIN = mThresholdDieMin;
+		Constants.THRESHOLD_DIE_MAX = mThresholdDieMax;
 	}
 
 	void Start ()

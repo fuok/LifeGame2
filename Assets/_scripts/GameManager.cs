@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
 		btnAddTrees.onClick.AddListener (() => {
 
-			List<int> positions = Utils.GetRandomNumbers (Constants.NUM_X * Constants.NUM_Y, Constants.NUM_X * Constants.NUM_Y / 5);
+			List<int> positions = Utils.GetRandomNumbers (Constants.NUM_X * Constants.NUM_Y, Constants.NUM_ADD);
 			for (int i = 0; i < positions.Count; i++) {
 //				print (positions [i]);
 				mTreeContainer.transform.GetChild (positions [i]).GetComponent<TreeLogic> ().TreeGrow ();
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 	{
 		bool hasAlive = false;
 		foreach (var item in mTreeContainer.GetComponentsInChildren<TreeLogic>()) {
-			if (item.mCurrentStatus == TreeStatus.Alive) {
+			if (item.mCurrentStatus != TreeStatus.Dead) {
 				hasAlive = true;
 				break;
 			}

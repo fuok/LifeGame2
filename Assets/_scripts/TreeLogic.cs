@@ -6,6 +6,8 @@ using UnityEngine;
 public enum TreeStatus
 {
 	Alive,
+	Young,
+	Old,
 	Dead
 }
 
@@ -16,7 +18,7 @@ public class TreeLogic : MonoBehaviour
 	public TreeStatus mCurrentStatus;
 	public TreeStatus mNextStatus;
 
-	public Material mMatBlack, mMatGreen;
+	public Material mMatBlack, mMatGreen, mMatYellow, mMatBrown;
 
 	//	void Start ()
 	//	{
@@ -61,6 +63,25 @@ public class TreeLogic : MonoBehaviour
 		gameObject.GetComponent<Renderer> ().material = mMatGreen;
 	}
 
+	public void TreeOld ()
+	{
+		switch (mCurrentStatus) {
+		case TreeStatus.Alive:
+			mCurrentStatus = TreeStatus.Young;
+			gameObject.GetComponent<Renderer> ().material = mMatYellow;
+			break;
+		case TreeStatus.Young:
+			mCurrentStatus = TreeStatus.Old;
+			gameObject.GetComponent<Renderer> ().material = mMatBrown;
+			break;
+		case TreeStatus.Old:
+			TreeDie ();
+			break;
+		default:
+			break;
+		}
+	}
+
 	private void TreeDie ()
 	{
 		mCurrentStatus = TreeStatus.Dead;
@@ -72,7 +93,8 @@ public class TreeLogic : MonoBehaviour
 	{
 		int count = 0;
 		for (int i = 0; i < mAliveAroundList.Count; i++) {
-			if (mAliveAroundList [i].GetComponent<TreeLogic> ().mCurrentStatus == TreeStatus.Alive) {
+//			if (mAliveAroundList [i].GetComponent<TreeLogic> ().mCurrentStatus == TreeStatus.Alive || mAliveAroundList [i].GetComponent<TreeLogic> ().mCurrentStatus == TreeStatus.Young) {
+			if (mAliveAroundList [i].GetComponent<TreeLogic> ().mCurrentStatus != TreeStatus.Dead) {
 				count++;
 			}
 		}
@@ -88,15 +110,20 @@ public class TreeLogic : MonoBehaviour
 	{
 		switch (mCurrentStatus) {
 		case TreeStatus.Dead:
-			if (mAliveAround == 3) {
+			if (mAliveAround == Constants.THRESHOLD_GROW) {
 				TreeGrow ();
 			}
 			break;
 		case TreeStatus.Alive:
-			if (mAliveAround < 2) {
-				TreeDie ();
-			} else if (mAliveAround > 3) {
-				TreeDie ();
+		case TreeStatus.Young:
+		case TreeStatus.Old:
+			//首先是自然衰亡
+			TreeOld ();
+			//之后是环境衰亡
+			if (mAliveAround < Constants.THRESHOLD_DIE_MIN) {
+				TreeOld ();
+			} else if (mAliveAround > Constants.THRESHOLD_DIE_MAX) {
+				TreeOld ();
 			}
 			break;
 		default:

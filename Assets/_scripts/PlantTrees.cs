@@ -15,7 +15,7 @@ public class PlantTrees : MonoBehaviour
 	public int mThresholdDieMin;
 	public int mThresholdDieMax;
 
-	public GameObject mTree;
+	public GameObject mTreeNode;
 	public Transform mTreeContainer;
 
 	void Awake ()
@@ -33,7 +33,10 @@ public class PlantTrees : MonoBehaviour
 
 		for (int i = 0; i < mX; i++) {
 			for (int j = 0; j < mY; j++) {
-				Instantiate (mTree, new Vector3 (i, 0f, j), Quaternion.identity, mTreeContainer);
+				GameObject node = Instantiate (mTreeNode, new Vector3 (i, 0f, j), Quaternion.identity, mTreeContainer);
+
+				//添加树模型
+				Instantiate (Resources.Load<GameObject> ("tree/Tree-01"), node.transform);
 			}
 		}
 

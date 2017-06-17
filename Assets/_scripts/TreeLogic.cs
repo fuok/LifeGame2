@@ -60,7 +60,8 @@ public class TreeLogic : MonoBehaviour
 	public void TreeGrow ()
 	{
 		mCurrentStatus = TreeStatus.Alive;
-		gameObject.GetComponent<Renderer> ().material = mMatGreen;
+		transform.GetChild (0).gameObject.SetActive (true);
+		gameObject.GetComponentInChildren<Renderer> ().material = mMatGreen;
 	}
 
 	public void TreeOld ()
@@ -68,11 +69,11 @@ public class TreeLogic : MonoBehaviour
 		switch (mCurrentStatus) {
 		case TreeStatus.Alive:
 			mCurrentStatus = TreeStatus.Young;
-			gameObject.GetComponent<Renderer> ().material = mMatYellow;
+			gameObject.GetComponentInChildren<Renderer> ().material = mMatYellow;
 			break;
 		case TreeStatus.Young:
 			mCurrentStatus = TreeStatus.Old;
-			gameObject.GetComponent<Renderer> ().material = mMatBrown;
+			gameObject.GetComponentInChildren<Renderer> ().material = mMatBrown;
 			break;
 		case TreeStatus.Old:
 			TreeDie ();
@@ -85,7 +86,8 @@ public class TreeLogic : MonoBehaviour
 	private void TreeDie ()
 	{
 		mCurrentStatus = TreeStatus.Dead;
-		gameObject.GetComponent<Renderer> ().material = mMatBlack;
+		transform.GetChild (0).gameObject.SetActive (false);
+//		gameObject.GetComponent<Renderer> ().material = mMatBlack;
 	}
 
 	//获取当前树周围活着的树

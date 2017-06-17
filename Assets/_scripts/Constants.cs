@@ -13,4 +13,6 @@ public class Constants
 	public static int THRESHOLD_DIE_MIN;
 	public static int THRESHOLD_DIE_MAX;
 
+	public static int TURN_COUNT;
+
 }

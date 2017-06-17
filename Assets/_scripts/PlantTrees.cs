@@ -36,8 +36,8 @@ public class PlantTrees : MonoBehaviour
 				GameObject node = Instantiate (mTreeNode, new Vector3 (i, 0f, j), Quaternion.identity, mTreeContainer);
 
 				//添加树模型
-//				Instantiate (Resources.Load<GameObject> ("tree/Tree-01"), node.transform);
-				Instantiate (Resources.Load<GameObject> ("tree/Tree-02"), node.transform);
+				Instantiate (Resources.Load<GameObject> ("tree/Tree-01"), node.transform);
+//				Instantiate (Resources.Load<GameObject> ("tree/Tree-02"), node.transform);
 			}
 		}
 

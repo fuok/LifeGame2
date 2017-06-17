@@ -9,7 +9,7 @@ public class TurnManager : MonoBehaviour
 		get;
 	}
 
-	public int mTurnCount;
+	private int mTurnCount;
 	public GameObject mTreeContainer;
 
 	void Awake ()
@@ -37,6 +37,7 @@ public class TurnManager : MonoBehaviour
 	IEnumerator NextTurnCoroutine ()
 	{
 		mTurnCount++;
+		Constants.TURN_COUNT = mTurnCount;
 		mTreeContainer.BroadcastMessage ("GetAliveAround", SendMessageOptions.DontRequireReceiver);//可以考虑协程循环发出
 		yield return new WaitForSeconds (0.5f);
 		mTreeContainer.BroadcastMessage ("RefreshTreeStatus", SendMessageOptions.DontRequireReceiver);

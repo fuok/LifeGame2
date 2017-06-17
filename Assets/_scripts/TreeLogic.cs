@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 public enum TreeStatus
@@ -61,6 +62,7 @@ public class TreeLogic : MonoBehaviour
 	{
 		mCurrentStatus = TreeStatus.Alive;
 		transform.GetChild (0).gameObject.SetActive (true);
+		transform.GetChild (0).gameObject.GetComponent<DOTweenAnimation> ().DOPlayById ("0");
 		gameObject.GetComponentInChildren<Renderer> ().material = mMatGreen;
 	}
 
@@ -86,7 +88,9 @@ public class TreeLogic : MonoBehaviour
 	private void TreeDie ()
 	{
 		mCurrentStatus = TreeStatus.Dead;
-		transform.GetChild (0).gameObject.SetActive (false);
+//		transform.GetChild (0).gameObject.GetComponent<DOTweenAnimation> ().DORestart (true);
+		transform.GetChild (0).gameObject.GetComponent<DOTweenAnimation> ().DOPlayById ("1");
+//		transform.GetChild (0).gameObject.SetActive (false);
 //		gameObject.GetComponent<Renderer> ().material = mMatBlack;
 	}
 

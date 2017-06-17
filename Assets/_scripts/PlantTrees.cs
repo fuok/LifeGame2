@@ -10,7 +10,12 @@ public class PlantTrees : MonoBehaviour
 	public GameObject mTree;
 	public Transform mTreeContainer;
 
-	// Use this for initialization
+	void Awake ()
+	{
+		Constants.NUM_X = mX;
+		Constants.NUM_Y = mY;		
+	}
+
 	void Start ()
 	{
 
@@ -19,12 +24,9 @@ public class PlantTrees : MonoBehaviour
 				Instantiate (mTree, new Vector3 (i, 0f, j), Quaternion.identity, mTreeContainer);
 			}
 		}
+
+		mTreeContainer.BroadcastMessage ("GetAllTreesAround", SendMessageOptions.DontRequireReceiver);
 		
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
+
 }

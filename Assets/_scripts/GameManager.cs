@@ -16,15 +16,15 @@ public class GameManager : MonoBehaviour
 //			foreach (var item in mTreeContainer.GetComponentsInChildren<TreeLogic>()) {
 //				item.BroadcastMessage
 //			}
-			Invoke ("StartNextTurn", 0f);
-//			InvokeRepeating ("StartNextTurn", 1f, 2f);
+//			Invoke ("StartNextTurn", 0f);
+			InvokeRepeating ("StartNextTurn", 0.5f, 1f);
 
 
 		});
 
 		btnAddTrees.onClick.AddListener (() => {
 
-			List<int> positions = Utils.GetRandomNumbers (100, 20);
+			List<int> positions = Utils.GetRandomNumbers (Constants.NUM_X * Constants.NUM_Y, Constants.NUM_X * Constants.NUM_Y / 5);
 			for (int i = 0; i < positions.Count; i++) {
 //				print (positions [i]);
 				mTreeContainer.transform.GetChild (positions [i]).GetComponent<TreeLogic> ().TreeGrow ();
@@ -40,6 +40,18 @@ public class GameManager : MonoBehaviour
 
 	private void StartNextTurn ()
 	{
-		TurnManager.Instance.NextTurn ();
+		bool hasAlive = false;
+		foreach (var item in mTreeContainer.GetComponentsInChildren<TreeLogic>()) {
+			if (item.mCurrentStatus == TreeStatus.Alive) {
+				hasAlive = true;
+				break;
+			}
+		}
+		if (hasAlive) {
+			TurnManager.Instance.NextTurn ();
+		} else {
+			print ("世界消亡");
+			CancelInvoke ("StartNextTurn");
+		}
 	}
 }

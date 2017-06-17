@@ -19,20 +19,18 @@ public class TurnManager : MonoBehaviour
 		}
 	}
 
-	void Start ()
-	{
-		
-	}
+//	void Start ()
+//	{
+//		
+//	}
 
-	void Update ()
-	{
-		
-	}
+//	void Update ()
+//	{
+//		
+//	}
 
 	public void NextTurn ()
 	{
-//		mTurnCount++;
-//		mTreeContainer.BroadcastMessage ("GetAliveAround", SendMessageOptions.RequireReceiver);//可以考虑协程循环发出
 		StartCoroutine (NextTurnCoroutine ());
 	}
 
@@ -40,7 +38,7 @@ public class TurnManager : MonoBehaviour
 	{
 		mTurnCount++;
 		mTreeContainer.BroadcastMessage ("GetAliveAround", SendMessageOptions.DontRequireReceiver);//可以考虑协程循环发出
-		yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (0.5f);
 		mTreeContainer.BroadcastMessage ("RefreshTreeStatus", SendMessageOptions.DontRequireReceiver);
 	}
 }

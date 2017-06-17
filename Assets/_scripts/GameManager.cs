@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 	{
 		btnNextTurn.onClick.AddListener (() => {
 //			Invoke ("StartNextTurn", 0f);
-			InvokeRepeating ("StartNextTurn", 0.5f, 1f);
+			InvokeRepeating ("StartNextTurn", 0.5f, 2f);
 		});
 
 		btnAddTrees.onClick.AddListener (() => {

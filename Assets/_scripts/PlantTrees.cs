@@ -16,6 +16,7 @@ public class PlantTrees : MonoBehaviour
 	public int mThresholdDieMax;
 
 	public GameObject mTreeNode;
+	public GameObject mGrid;
 	public Transform mTreeContainer;
 
 	void Awake ()
@@ -30,6 +31,7 @@ public class PlantTrees : MonoBehaviour
 
 	void Start ()
 	{
+		GameObject.Instantiate (mGrid, mGrid.transform.position, Quaternion.identity);
 
 		for (int i = 0; i < mX; i++) {
 			for (int j = 0; j < mY; j++) {

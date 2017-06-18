@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
 	public GameObject panelInGame;
 	public Text txtScoreInGame;
+	public Button btnPause;
+	public Button btnContinue;
 
 	public GameObject panelGameOver;
 	public Text txtScore;
@@ -45,6 +47,16 @@ public class GameManager : MonoBehaviour
 		});
 
 		//Game中
+		btnPause.onClick.AddListener (() => {
+			PauseGame ();
+			btnPause.gameObject.SetActive (false);
+			btnContinue.gameObject.SetActive (true);
+		});
+		btnContinue.onClick.AddListener (() => {
+			ContinueGame ();
+			btnContinue.gameObject.SetActive (false);
+			btnPause.gameObject.SetActive (true);
+		});
 
 		//Game Over
 		btnBack2Start.onClick.AddListener (() => {
@@ -72,9 +84,22 @@ public class GameManager : MonoBehaviour
 			//				print (positions [i]);
 			mTreeContainer.transform.GetChild (positions [i]).GetComponent<TreeLogic> ().TreeGrow ();
 		}
-		//开始循环
+		//开始循环,这里的回合并没有使用Event通知，而是固定时间开始
 		InvokeRepeating ("StartNextTurn", 2f, 2f);
 	}
+
+	private void PauseGame ()
+	{
+		StopNextTurn ();
+	}
+
+	private void ContinueGame ()
+	{
+		InvokeRepeating ("StartNextTurn", 2f, 2f);
+	}
+
+
+	//----------------Control Turn-------------------------------------------------------------------------
 
 	private void StartNextTurn ()
 	{
@@ -98,4 +123,10 @@ public class GameManager : MonoBehaviour
 			txtScore.text = Constants.TURN_COUNT.ToString ();
 		}
 	}
+
+	private void StopNextTurn ()
+	{
+		CancelInvoke ("StartNextTurn");
+	}
+
 }
